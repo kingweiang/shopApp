@@ -31,85 +31,40 @@ var Main=React.createClass({
         return (
             <TabNavigator>
                 {/*首页*/}
-                <TabNavigator.Item
-                    title = "首页"
-                    renderIcon={()=> <Image source={{uri:'icon_tabbar_homepage'}} style={styles.iconStyle}/>}
-                    renderSelectedIcon={() => <Image source={{uri:'icon_tabbar_homepage_selected'}} style={styles.iconStyle}/>}
-                    selected={this.state.selectedTab === 'home'}
-                    onPress={() => this.setState({ selectedTab: 'home' })}
-                >
-                    <Navigator
-                        initialRoute={{name:"首页",component:Home}}
-                        configureScene={()=>{
-                            return Navigator.SceneConfigs.PushFromRight;
-                        }}
-                        renderScene={(route,navigator)=>{
-                            let Component = route.component;
-                            return <Component {...route.passProps} navigator={navigator} />;
-                        }}
-                    />
-                </TabNavigator.Item>
+                {this.renderTabBarItem('首页','icon_tabbar_homepage','icon_tabbar_homepage_selected','home',Home,'首页')}
                 {/*商家*/}
-                <TabNavigator.Item
-                    selected={this.state.selectedTab === 'shop'}
-                    onPress={() => this.setState({ selectedTab: 'shop' })}
-                    title = "商家"
-                    renderIcon={()=> <Image source={{uri:'icon_tabbar_merchant_normal'}} style={styles.iconStyle}/>}
-                    renderSelectedIcon={() => <Image source={{uri:'icon_tabbar_merchant_selected'}} style={styles.iconStyle}/>}
-                    >
-                    <Navigator
-                        initialRoute={{name:"商家",component:Shop}}
-                        configureScene={()=>{
-                            return Navigator.SceneConfigs.PushFromRight;
-                        }}
-                        renderScene={(route,navigator)=>{
-                            let Component = route.component;
-                            return <Component {...route.passProps} navigator={navigator} />;
-                        }}
-                    />
-                </TabNavigator.Item>
+                {this.renderTabBarItem('商家','icon_tabbar_merchant_normal','icon_tabbar_merchant_selected','shop',Shop,'商家')}
                 {/*我的*/}
-                <TabNavigator.Item
-                    selected={this.state.selectedTab === 'mine'}
-                    onPress={() => this.setState({ selectedTab: 'mine' })}
-                    title = "我的"
-                    renderIcon={()=> <Image source={{uri:'icon_tabbar_mine'}} style={styles.iconStyle}/>}
-                    renderSelectedIcon={() => <Image source={{uri:'icon_tabbar_mine_selected'}} style={styles.iconStyle}/>}
-                    >
-                    <Navigator
-                        initialRoute={{name:"我的",component:Mine}}
-                        configureScene={()=>{
-                            return Navigator.SceneConfigs.PushFromRight;
-                        }}
-                        renderScene={(route,navigator)=>{
-                            let Component = route.component;
-                            return <Component {...route.passProps} navigator={navigator} />;
-                        }}
-                    />
-                </TabNavigator.Item>
+                {this.renderTabBarItem('我的','icon_tabbar_mine','icon_tabbar_mine_selected','mine',Mine,'我的')}
                 {/*更多*/}
-                <TabNavigator.Item
-                    selected={this.state.selectedTab === 'misc'}
-                    onPress={() => this.setState({ selectedTab: 'misc' })}
-                    title = "更多"
-                    renderIcon={()=> <Image source={{uri:'icon_tabbar_misc'}} style={styles.iconStyle}/>}
-                    renderSelectedIcon={() => <Image source={{uri:'icon_tabbar_misc_selected'}} style={styles.iconStyle}/>}
-                    >
-                    <Navigator
-                        initialRoute={{name:"更多",component:More}}
-                        configureScene={()=>{
-                            return Navigator.SceneConfigs.PushFromRight;
-                        }}
-                        renderScene={(route,navigator)=>{
-                            let Component = route.component;
-                            return <Component {...route.passProps} navigator={navigator} />;
-                        }}
-                    />
-                </TabNavigator.Item>
+                {this.renderTabBarItem('更多','icon_tabbar_misc','icon_tabbar_misc_selected','more',More,'更多')}
 
             </TabNavigator>
         );
-    }
+    },
+
+    renderTabBarItem(title,iconName,selectedIconName,selectedTab,componentName,componentTitle){
+        return(
+            <TabNavigator.Item
+                title = {title}  //  传递变量用大括号
+                renderIcon={()=> <Image source={{uri:iconName}} style={styles.iconStyle}/>}
+                renderSelectedIcon={() => <Image source={{uri:selectedIconName}} style={styles.iconStyle}/>}
+                selected={this.state.selectedTab === selectedTab}
+                onPress={() => this.setState({ selectedTab: selectedTab})}
+            >
+                <Navigator
+                    initialRoute={{name:componentTitle,component:componentName}}
+                    configureScene={()=>{
+                        return Navigator.SceneConfigs.PushFromRight;
+                    }}
+                    renderScene={(route,navigator)=>{
+                        let Component = route.component;
+                        return <Component {...route.passProps} navigator={navigator} />;
+                    }}
+                />
+            </TabNavigator.Item>
+        )
+    },
 });
 
 const styles = StyleSheet.create({
