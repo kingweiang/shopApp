@@ -37,13 +37,13 @@ var Main=React.createClass({
                 {/*我的*/}
                 {this.renderTabBarItem('我的','icon_tabbar_mine','icon_tabbar_mine_selected','mine',Mine,'我的')}
                 {/*更多*/}
-                {this.renderTabBarItem('更多','icon_tabbar_misc','icon_tabbar_misc_selected','more',More,'更多')}
+                {this.renderTabBarItem('更多','icon_tabbar_misc','icon_tabbar_misc_selected','more',More,'更多','3')}
 
             </TabNavigator>
         );
     },
 
-    renderTabBarItem(title,iconName,selectedIconName,selectedTab,componentName,componentTitle){
+    renderTabBarItem(title,iconName,selectedIconName,selectedTab,componentName,componentTitle,badg){
         return(
             <TabNavigator.Item
                 title = {title}  //  传递变量用大括号
@@ -51,6 +51,8 @@ var Main=React.createClass({
                 renderSelectedIcon={() => <Image source={{uri:selectedIconName}} style={styles.iconStyle}/>}
                 selected={this.state.selectedTab === selectedTab}
                 onPress={() => this.setState({ selectedTab: selectedTab})}
+                selectedTitleStyle={styles.selectedTitleStyle}
+                badgeText = {badg}
             >
                 <Navigator
                     initialRoute={{name:componentTitle,component:componentName}}
@@ -71,6 +73,9 @@ const styles = StyleSheet.create({
     iconStyle:{
         width: Platform.OS==='ios'?30:25,
         height:Platform.OS==='ios'?30:25
+    },
+    selectedTitleStyle:{
+        color:'orange',
     }
 });
 
