@@ -10,7 +10,9 @@ import {
     StyleSheet,
     Text,
     View,
-    Image
+    Image,
+    Platform,
+    TouchableOpacity
 } from 'react-native';
 
 var CommonCell=React.createClass({
@@ -22,20 +24,23 @@ var CommonCell=React.createClass({
 
     render() {
         return (
+        <TouchableOpacity onPress={()=>{alert('点击了')}}>
             <View style={styles.container}>
                 <Text style={styles.welcome}>
                     {/*左边*/}
                     {this.props.title}
                 </Text>
                 {/*右边*/}
-                <Image source={{uri:'icon_mine_setting'}} style={{width:20,height:20}}/>
+                <Image source={{uri:'icon_cell_rightArrow'}} style={{width:Platform.OS == 'ios' ? 10 : 8,height:Platform.OS == 'ios' ? 13 : 15, marginRight:8,}}/>
             </View>
+        </TouchableOpacity>
         );
     },
 });
 
 const styles = StyleSheet.create({
     container: {
+        marginTop:Platform.OS == 'ios' ? 8 : 6,
         height:40,
         backgroundColor:'white',
         borderBottomColor:'#dddddd',
@@ -46,7 +51,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     welcome: {
-        fontSize: 20,
+        fontSize: Platform.OS == 'ios' ? 16 : 14,
         textAlign: 'center',
         margin: 10,
         marginLeft:8,
