@@ -81,7 +81,7 @@ var HeaderView = React.createClass({
 
 const styles = StyleSheet.create({
     container: {
-        height:Platform.OS == 'ios' ? 165 : 150,
+        height:Platform.OS == 'ios' ? 330 : 150,
         backgroundColor:'rgba(255,96,0,1.0)'
     },
 
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
 
     topViewStyle:{
         flexDirection:'row',
-        marginTop:Platform.OS == 'ios' ? 40 : 25,
+        marginTop:Platform.OS == 'ios' ? 205 : 25,
         // 设置侧轴的对齐方式
         alignItems:'center',
         // 设置主轴的对齐方式

@@ -22,6 +22,8 @@ var Mine=React.createClass({
         return (
             <ScrollView
                 style={styles.scrollviewStyle}
+                contentInset={{top:-165}}
+                contentOffset={{y:165}}
             >
                 {/*头部的View*/}
                 <HeaderView />

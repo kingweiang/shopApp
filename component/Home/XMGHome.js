@@ -13,13 +13,15 @@ import {
     TouchableOpacity,
     TextInput,
     Image,
-    Platform
+    Platform,
+    ScrollView
 } from 'react-native';
 
 var Dimensions = require('Dimensions');
 var {width, height} = Dimensions.get('window');
 
 var HomeDetail = require('./XMGHomeDetail')
+var TopView = require('./XMGTopView')
 
 var Home=React.createClass({
     render() {
@@ -27,11 +29,9 @@ var Home=React.createClass({
             <View style={styles.container}>
                 {/*导航条*/}
                 {this.renderNavBar()}
-                <TouchableOpacity onPress={()=>{this.pushToDetail()}}>
-                <Text style={styles.welcome}>
-                    Welcome to Home!
-                </Text>
-                </TouchableOpacity>
+                <ScrollView>
+                    <TopView/>
+                </ScrollView>
             </View>
         );
     },
