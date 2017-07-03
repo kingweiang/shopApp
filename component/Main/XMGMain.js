@@ -53,6 +53,7 @@ var Main=React.createClass({
                 onPress={() => this.setState({ selectedTab: selectedTab})}
                 selectedTitleStyle={styles.selectedTitleStyle}
                 badgeText = {badg}
+
             >
                 <Navigator
                     initialRoute={{name:componentTitle,component:componentName}}

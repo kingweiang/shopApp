@@ -12,16 +12,23 @@ import {
     View,
     Image,
     Platform,
-    TouchableOpacity
+    TouchableOpacity,
+    Switch
 } from 'react-native';
 
 var CommonCell=React.createClass({
     getDefaultProps(){
         return{
             title:'',
+            isSwitch:false,
+            rightTitle:''
         }
     },
-
+    getInitialState(){
+        return{
+            isOn:false,
+        }
+    },
     render() {
         return (
         <TouchableOpacity onPress={()=>{alert('点击了')}}>
@@ -31,16 +38,40 @@ var CommonCell=React.createClass({
                     {this.props.title}
                 </Text>
                 {/*右边*/}
-                <Image source={{uri:'icon_cell_rightArrow'}} style={{width:Platform.OS == 'ios' ? 10 : 8,height:Platform.OS == 'ios' ? 13 : 15, marginRight:8,}}/>
+                {this.renderRightView()}
             </View>
         </TouchableOpacity>
         );
     },
+
+    // cell 右边显示的内容控制
+    renderRightView(){
+        if (this.props.isSwitch){
+            return(
+                <Switch value={this.state.isOn == true} onValueChange={()=>{this.setState({isOn:!this.state.isOn})}} style={{marginRight:Platform.OS == 'ios' ? 8 : 0,}}/>
+            )
+        }else {
+            return(
+            <View style={{flexDirection:'row',alignItems:'center'}}>
+                {this.rightTitle()}
+                <Image source={{uri:'icon_cell_rightArrow'}} style={{width:Platform.OS == 'ios' ? 10 : 8,height:Platform.OS == 'ios' ? 13 : 15, marginRight:8,}}/>
+            </View>
+            )
+        }
+    },
+
+    rightTitle(){
+        if(this.props.rightTitle.length>0){
+            return(
+                <Text style={{color:'gray',marginRight:3}}>{this.props.rightTitle}</Text>
+            )
+        }
+    }
 });
 
 const styles = StyleSheet.create({
     container: {
-        marginTop:Platform.OS == 'ios' ? 8 : 6,
+
         height:40,
         backgroundColor:'white',
         borderBottomColor:'#dddddd',
