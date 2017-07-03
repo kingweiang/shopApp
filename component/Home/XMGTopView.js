@@ -59,13 +59,13 @@ var TopView=React.createClass({
     renderScrollView(){
         // 组件数组
         var itemArr = [];
-        // 颜色数组
-        var colorArr =['red','green','orange','blue'];
-        for (var i=0;i<colorArr.length;i++){
+        // 颜色数组-->数据数组
+        var dataArr =TopMenu.data;
+        for (var i=0;i<dataArr.length;i++){
             itemArr.push(
-              <View key={i} style = {{backgroundColor:colorArr[i],width:375,height:120}}>
-                  <Text>{i}</Text>
-              </View>
+              <ToplistView key={i}
+                dataArr ={dataArr[i]}
+              />
             );
         }
         return itemArr;

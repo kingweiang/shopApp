@@ -11,8 +11,13 @@ import {
     Text,
     View,
     Image,
-    ListView
+    ListView,
+    TouchableOpacity,
+    Platform
 } from 'react-native';
+
+var Dimensions = require('Dimensions');
+var {width}=Dimensions.get('window');
 
 var TopListView=React.createClass({
     getDefaultProps(){
@@ -33,23 +38,42 @@ var TopListView=React.createClass({
         return (
             <ListView
                 dataSource={this.state.dataSource}
-                renderRow={this.renderRow()}
+                renderRow={this.renderRow}
+                contentContainerStyle={styles.contentViewStyle}
+                scrollEnabled={false}  //  禁止上下滚动
             />
         );
     },
 
     renderRow(rowdata){
         return(
-            <View>
+        <TouchableOpacity onPress={()=>{alert('0')}}>
+            <View style={styles.cellStyle}>
                 <Image source={{uri:rowdata.image}} style={{width:52,height:52}}/>
-                <Text>{rowdata.title}</Text>
+                <Text style={{fontSize:Platform.OS=='ios'?12:11,color:'gray'}}>{rowdata.title}</Text>
             </View>
+        </TouchableOpacity>
         );
     },
 });
 
 const styles = StyleSheet.create({
-
+    contentViewStyle:{
+        // cell 在同一行显示
+        flexWrap:'wrap',
+        //  主轴方向
+        flexDirection:'row',
+        width:width,
+    },
+    cellStyle:{
+        width:70,
+        height:70,
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:10,
+        marginLeft:(width-70*5)/(5+1),
+       // backgroundColor:'orange'
+    }
 });
 
 module.exports = TopListView;

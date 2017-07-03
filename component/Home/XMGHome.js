@@ -22,6 +22,7 @@ var {width, height} = Dimensions.get('window');
 
 var HomeDetail = require('./XMGHomeDetail')
 var TopView = require('./XMGTopView')
+var MiddleView = require('./XMGHomeMiddleView')
 
 var Home=React.createClass({
     render() {
@@ -30,7 +31,10 @@ var Home=React.createClass({
                 {/*导航条*/}
                 {this.renderNavBar()}
                 <ScrollView>
+                    {/*头部*/}
                     <TopView/>
+                    {/*中间*/}
+                    <MiddleView/>
                 </ScrollView>
             </View>
         );
