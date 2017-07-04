@@ -17,19 +17,23 @@ import {
 var Dimensions = require('Dimensions');
 var {width, height} = Dimensions.get('window');
 
+var HomeDetail = require('./XMGHomeDetail');
+
 var CommonView=React.createClass({
     getDefaultProps(){
         return{
             title:'',
             subTitle:'',
             rightIcon:'',
-            titleColor:''
+            titleColor:'',
+            tplurl: '',
+            callBackClickCell: null
         }
     },
 
     render() {
         return (
-        <TouchableOpacity onPress={()=>{alert('点击了')}}>
+        <TouchableOpacity onPress={()=>{alert('0')}}>
             <View style={styles.container}>
                 {/*左边*/}
                 <View>
@@ -37,11 +41,16 @@ var CommonView=React.createClass({
                     <Text style={styles.subTitleStyle}>{this.props.subTitle}</Text>
                 </View>
                 {/*右边*/}
-                <Image source={{uri:this.props.rightIcon}} style={{width:64,height:43}} />
+                <Image source={{uri:this.props.rightIcon}} style={{width:64,height:43,resizeMode:'contain'}} />
             </View>
         </TouchableOpacity>
         );
-    }
+    },
+
+    clickCell(data){
+      if(this.props.callBackClickCell == null) return;
+      this.props.callBackClickCell(data);
+    },
 });
 
 const styles = StyleSheet.create({
@@ -51,6 +60,7 @@ const styles = StyleSheet.create({
         height:59,
         marginBottom:1,
         alignItems:'center',
+        marginRight:1,
 
         flexDirection:'row',
         justifyContent:'space-around'

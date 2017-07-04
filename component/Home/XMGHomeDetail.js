@@ -13,22 +13,22 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-var HomeDetail=React.createClass({
+var HomeDetail = React.createClass({
     render() {
         return (
             <View style={styles.container}>
                 <TouchableOpacity onPress={()=>{this.popTopHome()}}>
-                <Text style={styles.welcome}>
-                    Welcome to HomeDetail!
-                </Text>
+                    <Text style={styles.welcome}>
+                        测试跳转
+                    </Text>
                 </TouchableOpacity>
             </View>
         );
     },
 
     popTopHome(){
-      this.props.navigator.pop();
-    },
+        this.props.navigator.pop();
+    }
 });
 
 const styles = StyleSheet.create({

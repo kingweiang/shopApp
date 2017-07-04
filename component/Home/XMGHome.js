@@ -23,6 +23,7 @@ var {width, height} = Dimensions.get('window');
 var HomeDetail = require('./XMGHomeDetail')
 var TopView = require('./XMGTopView')
 var MiddleView = require('./XMGHomeMiddleView')
+var BottomView = require('./XMGMiddleBottomView')
 
 var Home=React.createClass({
     render() {
@@ -35,6 +36,8 @@ var Home=React.createClass({
                     <TopView/>
                     {/*中间*/}
                     <MiddleView/>
+                    {/*下半部分*/}
+                    <BottomView/>
                 </ScrollView>
             </View>
         );
@@ -74,6 +77,18 @@ var Home=React.createClass({
             title:"Home详情页"
         })
     },
+    // 跳转到二级界面
+    pushToDetail(data){
+
+        // alert(data);
+
+        this.props.navigator.push(
+            {
+                component: HomeDetail, // 要跳转的版块
+                title:'详情页'
+            }
+        );
+    }
 });
 
 const styles = StyleSheet.create({
