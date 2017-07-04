@@ -9,37 +9,86 @@ import {
     AppRegistry,
     StyleSheet,
     Text,
-    View
+    View,
+    Platform,
+    Image,
+    TouchableOpacity
 } from 'react-native';
+
+var Dimensions = require('Dimensions');
+var {width, height} = Dimensions.get('window');
+var CommonView = require('./XMGMiddleCommonView')
+var TopMiddleData = require('../../LocalData/HomeTopMiddleLeft.json')
 
 var HomeMiddleView=React.createClass({
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Welcome to Shop!
-                </Text>
+                {/*左边*/}
+                {this.renderLeftView()}
+                {/*右边*/}
+                <View>
+                {this.renderRightView()}
+                </View>
             </View>
         );
-    }
+    },
+
+    renderLeftView(){
+        var leftData= TopMiddleData.dataLeft[0];
+        return(
+        <TouchableOpacity onPress={()=>{alert('0')}}>
+            <View style={styles.leftViewStyle}>
+                <Image source={{uri:leftData.img1}} style={styles.leftImageStyle}/>
+                <Image source={{uri:leftData.img2}} style={styles.leftImageStyle}/>
+                <Text style={{color:'gray',fontSize:15,marginBottom:5}}>{leftData.title}</Text>
+                <View style={{flexDirection:'row',}}>
+                    <Text style={{color:'blue',marginRight:5,fontSize:12}}>{leftData.price}</Text>
+                    <Text style={{color:'orange',backgroundColor:'yellow',fontSize:12}}>{leftData.sale}</Text>
+                </View>
+            </View>
+        </TouchableOpacity>
+        )
+    },
+
+    renderRightView(){
+        var itemArr = [];
+        var rightData =TopMiddleData.dataRight;
+
+        for(var i=0; i<rightData.length; i++){
+            var data=rightData[i];
+            itemArr.push(
+                <CommonView
+                    title={data.title}
+                    subTitle={data.subTitle}
+                    rightIcon={data.rightImage}
+                    titleColor={data.titleColor}
+                    key = {i}
+                />
+            );
+        }
+        return itemArr;
+    },
 });
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        marginTop:Platform.OS=='ios'?15:12,
+        flexDirection:'row',
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
+    leftViewStyle: {
+        width:width*0.5,
+        height:119,
+        backgroundColor:'white',
+        marginRight:1,
+
+        alignItems:'center',
+        justifyContent:'center',
     },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
+    leftImageStyle: {
+        width:120,
+        height:30,
+        resizeMode:'contain'
     },
 });
 
