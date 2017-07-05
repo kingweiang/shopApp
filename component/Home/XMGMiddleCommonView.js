@@ -33,7 +33,7 @@ var CommonView=React.createClass({
 
     render() {
         return (
-        <TouchableOpacity onPress={()=>{alert('0')}}>
+        <TouchableOpacity onPress={()=>this.clickCell(this.props.tplurl)}>
             <View style={styles.container}>
                 {/*左边*/}
                 <View>

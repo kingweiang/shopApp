@@ -35,7 +35,9 @@ var Home=React.createClass({
                     {/*头部*/}
                     <TopView/>
                     {/*中间*/}
-                    <MiddleView/>
+                    <MiddleView
+                        popTopHome={(data)=>{this.pushToDetail(data)}}
+                    />
                     {/*下半部分*/}
                     <BottomView/>
                 </ScrollView>
