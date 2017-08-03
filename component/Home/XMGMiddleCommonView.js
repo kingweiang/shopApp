@@ -11,6 +11,7 @@ import {
     Text,
     View,
     Image,
+    Platform,
     TouchableOpacity
 } from 'react-native';
 
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor:'white',
         width:width*0.5-1,
-        height:59,
+        height:Platform.OS=='ios'?59:52,
         marginBottom:1,
         alignItems:'center',
         marginRight:1,
@@ -68,11 +69,12 @@ const styles = StyleSheet.create({
         justifyContent:'space-around'
     },
     titleStyle:{
-        fontSize:18,
+        fontSize:Platform.OS=='ios'?18:16,
         fontWeight:'bold',
     },
     subTitleStyle:{
-        color:'gray'
+        color:'gray',
+        fontSize:Platform.OS=='ios'?12:10,
     }
 });
 

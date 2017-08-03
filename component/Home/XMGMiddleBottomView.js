@@ -47,7 +47,7 @@ var BottomView=React.createClass({
             <TouchableOpacity onPress={()=>{alert('0')}}>
                 <View style={styles.leftViewStyle}>
                     <View >
-                        <Text style={{color:'red',marginRight:5,fontSize:Platform.OS=='ios'?22:20}}>{leftData.title}</Text>
+                        <Text style={{color:'red',marginRight:5,fontSize:Platform.OS=='ios'?22:19,fontWeight:Platform.OS=='ios'?'400':'100'}}>{leftData.title}</Text>
                         <Text style={{color:'gray',fontSize:12}}>{leftData.subTitle}</Text>
                     </View>
                     <Image source={{uri:leftData.image}} style={styles.leftImageStyle}/>
@@ -96,7 +96,7 @@ var BottomView=React.createClass({
 
 const styles = StyleSheet.create({
     container: {
-        marginTop:10,
+        marginTop:Platform.OS=='ios'?10:8,
     },
     topViewStyle: {
 
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 
     },
     leftViewStyle:{
-        height:60,
+        height:Platform.OS=='ios'?60:55,
         backgroundColor:'white',
         marginBottom:1,
         flexDirection:'row',
@@ -118,7 +118,8 @@ const styles = StyleSheet.create({
     leftImageStyle: {
         width:120,
         height:55,
-        resizeMode:'contain'
+        resizeMode:'contain',
+
     },
 });
 

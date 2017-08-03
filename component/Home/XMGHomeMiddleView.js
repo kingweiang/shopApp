@@ -43,8 +43,8 @@ var HomeMiddleView=React.createClass({
                 <Image source={{uri:leftData.img2}} style={styles.leftImageStyle}/>
                 <Text style={{color:'gray',fontSize:15,marginBottom:5}}>{leftData.title}</Text>
                 <View style={{flexDirection:'row',}}>
-                    <Text style={{color:'blue',marginRight:5,fontSize:12}}>{leftData.price}</Text>
-                    <Text style={{color:'orange',backgroundColor:'yellow',fontSize:12}}>{leftData.sale}</Text>
+                    <Text style={{color:'blue',marginRight:5,fontSize:Platform.OS=='ios'?12:11}}>{leftData.price}</Text>
+                    <Text style={{color:'orange',backgroundColor:'yellow',fontSize:Platform.OS=='ios'?12:11}}>{leftData.sale}</Text>
                 </View>
             </View>
         </TouchableOpacity>
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     },
     leftViewStyle: {
         width:width*0.5-1,
-        height:119,
+        height:Platform.OS=='ios'?119:105,
         backgroundColor:'white',
         marginRight:1,
         alignItems:'center',
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     },
     leftImageStyle: {
         width:120,
-        height:30,
+        height:Platform.OS=='ios'?30:28,
         resizeMode:'contain'
     },
 });

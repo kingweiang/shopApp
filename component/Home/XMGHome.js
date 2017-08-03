@@ -24,6 +24,8 @@ var HomeDetail = require('./XMGHomeDetail')
 var TopView = require('./XMGTopView')
 var MiddleView = require('./XMGHomeMiddleView')
 var BottomView = require('./XMGMiddleBottomView')
+var ShopCenter = require('./XMGShopCenter')
+var ShopCenterDetail = require('./ShopCenterDetail')
 
 var Home=React.createClass({
     render() {
@@ -44,6 +46,9 @@ var Home=React.createClass({
                         popTopHome={(data)=>{this.pushToDetail(data)}}
                     />
                     {/*购物中心*/}
+                    <ShopCenter
+                        popToHomeView={(url)=>this.pushToShopCenterDetail(url)}
+                    />
                 </ScrollView>
             </View>
         );
@@ -76,7 +81,21 @@ var Home=React.createClass({
             </View>
         )
     },
-
+    // 跳转购物中心详情页
+    pushToShopCenterDetail(url){
+        // alert(url)
+        this.props.navigator.push(
+            {
+                component: ShopCenterDetail, // 要跳转的版块
+                title:'购物中心详情页',
+                passProps:{'url':this.dealWithUrl(url)}
+            }
+        );
+    },
+    // 处理url
+    dealWithUrl(url){
+      return url.replace('imeituan://www.meituan.com/web/?url=http:','https:')
+    },
 // 跳转到二级界面
     pushToDetail(data){
         console.log(data);
