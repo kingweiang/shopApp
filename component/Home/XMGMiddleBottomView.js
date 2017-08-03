@@ -9,9 +9,14 @@ import {
     AppRegistry,
     StyleSheet,
     Text,
-    View
+    View,
+    Image,
+    TouchableOpacity,
+    Platform,
 } from 'react-native';
+
 var Home_D4 = require('../../LocalData/XMG_Home_D4.json');
+var Home_Top= require('../../LocalData/HomeTopMiddle.json')
 var CommonView = require('./XMGMiddleCommonView')
 
 var BottomView=React.createClass({
@@ -27,7 +32,7 @@ var BottomView=React.createClass({
             <View style={styles.container}>
                 {/*上部分*/}
                 <View style={styles.topViewStyle}>
-
+                    {this.renderTopItem()}
                 </View>
                 {/*下部分*/}
                 <View style={styles.bottomViewStyle}>
@@ -35,6 +40,20 @@ var BottomView=React.createClass({
                 </View>
             </View>
         );
+    },
+    renderTopItem(){
+        var leftData= Home_Top.data[0];
+        return(
+            <TouchableOpacity onPress={()=>{alert('0')}}>
+                <View style={styles.leftViewStyle}>
+                    <View >
+                        <Text style={{color:'red',marginRight:5,fontSize:Platform.OS=='ios'?22:20}}>{leftData.title}</Text>
+                        <Text style={{color:'gray',fontSize:12}}>{leftData.subTitle}</Text>
+                    </View>
+                    <Image source={{uri:leftData.image}} style={styles.leftImageStyle}/>
+                </View>
+            </TouchableOpacity>
+        )
     },
     renderBottomItem(){
         var itemArr = [];
@@ -59,6 +78,8 @@ var BottomView=React.createClass({
 
     // 继续往父级界面传递数据
     popToTopView(data){
+        console.log(data);
+        console.log('popToTopView11111');
         // 继续执行回调函数
         this.props.popTopHome(data);
     },
@@ -84,6 +105,20 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         flexWrap:'wrap',
 
+    },
+    leftViewStyle:{
+        height:60,
+        backgroundColor:'white',
+        marginBottom:1,
+        flexDirection:'row',
+        justifyContent:'space-around',
+        alignItems:'center',
+
+    },
+    leftImageStyle: {
+        width:120,
+        height:55,
+        resizeMode:'contain'
     },
 });
 

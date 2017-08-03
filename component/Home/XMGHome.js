@@ -31,15 +31,19 @@ var Home=React.createClass({
             <View style={styles.container}>
                 {/*导航条*/}
                 {this.renderNavBar()}
+                {/*首页主要内容*/}
                 <ScrollView>
                     {/*头部*/}
                     <TopView/>
                     {/*中间*/}
                     <MiddleView
-                        popTopHome={(data)=>{this.pushToDetail(data)}}
+
                     />
                     {/*下半部分*/}
-                    <BottomView/>
+                    <BottomView
+                        popTopHome={(data)=>{this.pushToDetail(data)}}
+                    />
+                    {/*购物中心*/}
                 </ScrollView>
             </View>
         );
@@ -50,12 +54,13 @@ var Home=React.createClass({
             <View style={styles.navBarStyle}>
                 {/*左边*/}
                 <TouchableOpacity onPress={()=>{alert('点击了')}}>
-                    <Text style={{color:'white',marginTop: Platform.OS == 'ios' ? 12 : 0,}}>长沙</Text>
+                    <Text style={{color:'white',marginTop: Platform.OS == 'ios' ? 12 : 0,fontSize:Platform.OS == 'ios' ?16:14,fontWeight:Platform.OS == 'ios' ?'600':'400'}}>长沙</Text>
                 </TouchableOpacity>
                 {/*中间*/}
                 <TextInput
                     placeholder="输入商家, 品类, 商圈"
                     style={styles.topInputStyle}
+                    underlineColorAndroid="transparent"
                 />
                 {/*右边*/}
                 <View style={styles.rightNavViewStyle}>
@@ -72,17 +77,11 @@ var Home=React.createClass({
         )
     },
 
-    //跳转子页面
-    pushToDetail(){
-        this.props.navigator.push({
-            component:HomeDetail,
-            title:"Home详情页"
-        })
-    },
-    // 跳转到二级界面
+// 跳转到二级界面
     pushToDetail(data){
-
-        // alert(data);
+        console.log(data);
+        console.log('pushToDetail11111');
+        alert(data);
 
         this.props.navigator.push(
             {
@@ -119,16 +118,22 @@ const styles = StyleSheet.create({
 
     topInputStyle:{ // 设置输入框
         width:width * 0.70,
-        height:Platform.OS == 'ios' ? 35 : 38,
+        height:Platform.OS == 'ios' ? 32 : 30,
         alignItems:'flex-end',
         backgroundColor:'white',
         marginTop: Platform.OS == 'ios' ? 22 : 0,
-
+        textAlignVertical:'center',  // 针对android 设置
+        padding: 0,                     // 针对android 设置
+        paddingTop: Platform.OS == 'ios' ?3.5:0,
+        // multiline = {true},
+        fontSize:Platform.OS == 'ios' ?16:14,
+        fontWeight:Platform.OS == 'ios' ?'400':'100',
         // 设置圆角
         borderRadius:Platform.OS == 'ios' ? 17 : 15,
+        // fontcolor:'#666666',
 
     // 内左边距
-        paddingLeft:Platform.OS == 'ios' ? 10 : 12,
+        paddingLeft:Platform.OS == 'ios' ? 14 : 12,
         // paddingTop:Platform.OS == 'ios' ? 0 : 12,
     },
 

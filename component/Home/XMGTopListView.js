@@ -49,7 +49,7 @@ var TopListView=React.createClass({
         return(
         <TouchableOpacity onPress={()=>{alert('0')}}>
             <View style={styles.cellStyle}>
-                <Image source={{uri:rowdata.image}} style={{width:52,height:52}}/>
+                <Image source={{uri:rowdata.image}} style={{width:Platform.OS == 'ios' ?52:50,height:Platform.OS == 'ios' ?52:50}}/>
                 <Text style={{fontSize:Platform.OS=='ios'?12:11,color:'gray'}}>{rowdata.title}</Text>
             </View>
         </TouchableOpacity>
@@ -67,11 +67,12 @@ const styles = StyleSheet.create({
     },
     cellStyle:{
         width:70,
-        height:70,
+        height:Platform.OS == 'ios' ?70:59,
         justifyContent:'center',
         alignItems:'center',
         marginTop:10,
         marginLeft:(width-70*5)/(5+1),
+        marginBottom:3,
        // backgroundColor:'orange'
     }
 });

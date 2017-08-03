@@ -26,7 +26,7 @@ var CommonView=React.createClass({
             subTitle:'',
             rightIcon:'',
             titleColor:'',
-            tplurl: '',
+            tplurl: '', //下级界面URL路径
             callBackClickCell: null
         }
     },
@@ -50,6 +50,8 @@ var CommonView=React.createClass({
     clickCell(data){
       if(this.props.callBackClickCell == null) return;
       this.props.callBackClickCell(data);
+      console.log(data);
+      console.log('clickCell111');
     },
 });
 

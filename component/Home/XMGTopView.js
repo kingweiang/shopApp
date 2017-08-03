@@ -12,7 +12,8 @@ import {
     View,
     ScrollView,
     ListView,
-    Image
+    Image,
+    Platform
 } from 'react-native';
 
 var Dimensions = require('Dimensions');
@@ -32,7 +33,7 @@ var TopView=React.createClass({
                 {/*内容部分*/}
                 <ScrollView
                     horizontal={true}      // 横向显示
-                    pagingEnabled={true}    // 设置页面
+                    pagingEnabled={true}    // 设置页码
                     showsHorizontalScrollIndicator={false}  // 隐藏横向滚动条
                     onMomentumScrollEnd ={this.onScrollAnimationEnd}  // 当一帧滚动完成
                 >
@@ -46,7 +47,7 @@ var TopView=React.createClass({
             </View>
         );
     },
-
+    // 当一帧滚动完成进行调用
     onScrollAnimationEnd(e){
         // 获取当前页码
         var currentPage =Math.floor(e.nativeEvent.contentOffset.x/width);
@@ -71,13 +72,14 @@ var TopView=React.createClass({
         return itemArr;
     },
 
+    // 页码指示器
     renderIndicator(){
         // 指示器数组
         var indicatorArr = [],style;
         for (var i=0 ; i<4 ; i++){
             style=(i===this.state.activePage)?{color:'orange'}:{color:'gray'}
             indicatorArr.push(
-                <Text key={i} style={[{fontSize:25},style]}>&bull;</Text>
+                <Text key={i} style={[{fontSize:Platform.OS=='ios'?25:30},style,{paddingBottom:Platform.OS=='ios'?18:0},{paddingTop:Platform.OS=='ios'?0:-10},{height:Platform.OS=='ios'?24:26}]}>&bull;</Text>
             )
         }
         return indicatorArr;
@@ -90,8 +92,15 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
     },
     indicatorStyle:{
+        // height:Platform.OS=='ios'?20:15,
+        // padding:0,
+        // 改变主轴方向为横向
         flexDirection:'row',
-        justifyContent:'center'
+        // 水平居中
+        justifyContent:'center',
+        // paddingBottom:3,
+        // backgroundColor:'green',
+        // alignItems:'center'
     },
     welcome: {
         fontSize: 20,
