@@ -45,7 +45,7 @@ var ShopCenterDetail=React.createClass({
                     <Image source={{uri:'icon_camera_back_normal'}} style={styles.navImageStyle}/>
                 </TouchableOpacity>
                 <Text style={{color:'white',fontSize:Platform.OS == 'ios' ? 18 : 16,marginTop: Platform.OS == 'ios' ? 18 : 0,fontWeight:'bold'}}>
-                    更多
+                    购物中心详情页
                 </Text>
                 <TouchableOpacity onPress={()=>{alert('点击了')}} style={styles.rightViewStyle}>
                     <Image source={{uri:'icon_mine_setting'}} style={styles.navImageStyle}/>
